@@ -10,21 +10,22 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task3.V21.Lib
 
             int[,] resultMatrix = (int[,])matrix.Clone();
 
-            for (int i = 0; i < rows - 1; i++)
+            // Собираем значения первого столбца
+            int[] firstColumn = new int[rows];
+            for (int i = 0; i < rows; i++)
             {
-                for (int j = 0; j < rows - i - 1; j++)
-                {
-                    if (resultMatrix[j, 0] > resultMatrix[j + 1, 0])
-                    {
-                        for (int k = 0; k < cols; k++)
-                        {
-                            int temp = resultMatrix[j, k];
-                            resultMatrix[j, k] = resultMatrix[j + 1, k];
-                            resultMatrix[j + 1, k] = temp;
-                        }
-                    }
-                }
+                firstColumn[i] = resultMatrix[i, 0];
             }
+
+            // Сортируем значения первого столбца
+            Array.Sort(firstColumn);
+
+            // Записываем отсортированные значения обратно в первый столбец
+            for (int i = 0; i < rows; i++)
+            {
+                resultMatrix[i, 0] = firstColumn[i];
+            }
+
             return resultMatrix;
         }
     }
