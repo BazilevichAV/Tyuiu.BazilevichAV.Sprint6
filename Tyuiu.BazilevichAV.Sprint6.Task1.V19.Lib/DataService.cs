@@ -11,7 +11,7 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task1.V19.Lib
             int index = 0;
             for (int x = startValue; x <= stopValue; x++)
             {
-                double result = Math.Cos(x) + Math.Cos(x) / x + 2 - 3 * x;
+                double result = Math.Cos(x) + Math.Cos(x) / (x + 2) - 3 * x;
                 res[index] = Math.Round(result, 2);
                 index++;
             }
