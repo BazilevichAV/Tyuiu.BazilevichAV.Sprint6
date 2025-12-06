@@ -12,20 +12,19 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task3.V21.Lib
 
             for (int i = 0; i < rows - 1; i++)
             {
-                for (int j = i + 1; j < rows; j++)
+                for (int j = 0; j < rows - i - 1; j++)
                 {
-                    if (resultMatrix[i, 0] > resultMatrix[j, 0])
+                    if (resultMatrix[j, 0] > resultMatrix[j + 1, 0])
                     {
                         for (int k = 0; k < cols; k++)
                         {
-                            int temp = resultMatrix[i, k];
-                            resultMatrix[i, k] = resultMatrix[j, k];
-                            resultMatrix[j, k] = temp;
+                            int temp = resultMatrix[j, k];
+                            resultMatrix[j, k] = resultMatrix[j + 1, k];
+                            resultMatrix[j + 1, k] = temp;
                         }
                     }
                 }
             }
-
             return resultMatrix;
         }
     }
