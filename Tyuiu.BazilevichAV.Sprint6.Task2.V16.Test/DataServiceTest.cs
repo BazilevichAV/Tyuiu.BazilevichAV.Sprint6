@@ -1,5 +1,5 @@
-﻿using Tyuiu.BazilevichAV.Sprint6.Task1.V19.Lib;
-namespace Tyuiu.BazilevichAV.Sprint6.Task1.V19.Test
+﻿using Tyuiu.BazilevichAV.Sprint6.Task2.V16.Lib;
+namespace Tyuiu.BazilevichAV.Sprint6.Task2.V16.Test
 {
     [TestClass]
     public sealed class DataServiceTest
