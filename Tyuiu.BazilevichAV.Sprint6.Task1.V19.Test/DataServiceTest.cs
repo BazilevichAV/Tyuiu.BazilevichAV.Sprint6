@@ -13,17 +13,17 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task1.V19.Test
             double[] res = ds.GetMassFunction(startValue, stopValue);
             double[] expected =
             {
-                4.67,   // x=-5
-                0.43,  // x=-4
-                -8.26,  // x=-3
-                -9.87,  // x=-2
-                -3.98,  // x=-1
-                1.00,   // x=0
-                0.02,   // x=1
-                -1.87,  // x=2
-                3.74,  // x=3
-                16.43,  // x=4
-                24.67   // x=5
+                15.19,   // x=-5
+                11.67,  // x=-4
+                9.0,  // x=-3
+                0.0,  // x=-2
+                4.08,  // x=-1
+                1.5,   // x=0
+                -2.28,   // x=1
+                -6.52,  // x=2
+                -10.19,  // x=3
+                -12.76,  // x=4
+                -14.68   // x=5
             };
             Assert.AreEqual(11, res.Length);
         }
