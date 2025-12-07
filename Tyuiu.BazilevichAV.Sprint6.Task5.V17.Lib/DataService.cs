@@ -14,7 +14,6 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task5.V17.Lib
 
             string content = File.ReadAllText(path);
 
-            // Извлекаем все числа из текста
             var numbers = new List<double>();
             string currentNumber = "";
 
@@ -22,14 +21,13 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task5.V17.Lib
             {
                 char c = content[i];
 
-                // Если символ является частью числа (цифра, точка, минус, запятая)
+               
                 if (char.IsDigit(c) || c == '.' || c == '-' || c == ',')
                 {
                     currentNumber += c;
                 }
                 else if (!string.IsNullOrEmpty(currentNumber))
                 {
-                    // Если нашли разделитель или конец числа
                     if (TryParseNumber(currentNumber, out double number))
                     {
                         numbers.Add(number);
@@ -38,22 +36,18 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task5.V17.Lib
                 }
             }
 
-            // Добавляем последнее число, если есть
             if (!string.IsNullOrEmpty(currentNumber) && TryParseNumber(currentNumber, out double lastNumber))
             {
                 numbers.Add(lastNumber);
             }
 
-            // Фильтруем только отрицательные числа
             return numbers.Where(n => n < 0).ToArray();
         }
 
         private bool TryParseNumber(string str, out double result)
         {
-            // Заменяем запятую на точку для корректного парсинга
             string normalized = str.Replace(',', '.');
 
-            // Удаляем лишние минусы (оставляем только первый)
             if (normalized.Count(c => c == '-') > 1)
             {
                 normalized = normalized.Replace("-", "");
