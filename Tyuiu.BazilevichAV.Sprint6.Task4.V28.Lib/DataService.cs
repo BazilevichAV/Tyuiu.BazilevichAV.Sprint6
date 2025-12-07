@@ -15,7 +15,7 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task4.V28.Lib
 
                 if (x == 0)
                 {
-                    result = 0.0;
+                    result = 1.0;
                 }
                 else
                 {
