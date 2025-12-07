@@ -10,7 +10,9 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task5.V17.Lib
         public double[] LoadFromDataFile(string path)
         {
 
-            StringBuilder result = new StringBuilder();
+            string tempPath = Path.GetTempPath();
+            string outputPath = Path.Combine(tempPath, "OutPutFileTask5V17.txt");
+
             List<double> negnum = new List<double>();
 
             using (StreamReader reader = new StreamReader(path))
@@ -26,23 +28,24 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task5.V17.Lib
                         if (double.TryParse(numberStr.Replace(',', '.'),
                             NumberStyles.Any,
                             CultureInfo.InvariantCulture,
-                            out double number))
+                            out double number) && number < 0)
                         {
-                            if (number < 0)
-                            {
-                                // Округляем до трех знаков и добавляем в список
-                                double roundedNumber = Math.Round(number, 3);
-                                negnum.Add(roundedNumber);
-                            }
+                            double roundedNumber = Math.Round(number, 3);
+                            negnum.Add(roundedNumber);
                         }
                     }
                 }
             }
 
-            // Вывод отрицательных чисел в консоль (уже округленных)
-            foreach (double number in negnum)
+            // Запись результата в файл
+            using (StreamWriter writer = new StreamWriter(outputPath, false))
             {
-                Console.WriteLine(number.ToString("F3", CultureInfo.InvariantCulture));
+                foreach (double number in negnum)
+                {
+                    string formattedNumber = number.ToString("F3", CultureInfo.InvariantCulture);
+                    writer.WriteLine(formattedNumber);
+                    Console.WriteLine(formattedNumber); // Вывод в консоль для проверки
+                }
             }
 
             return negnum.ToArray();
