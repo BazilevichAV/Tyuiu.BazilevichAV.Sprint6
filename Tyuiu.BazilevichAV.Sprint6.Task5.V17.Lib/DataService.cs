@@ -9,7 +9,7 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task5.V17.Lib
     {
         public double[] LoadFromDataFile(string path)
         {
-           
+
             StringBuilder result = new StringBuilder();
             List<double> negnum = new List<double>();
 
@@ -30,18 +30,19 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task5.V17.Lib
                         {
                             if (number < 0)
                             {
-                                negnum.Add(number);
+                                // Округляем до трех знаков и добавляем в список
+                                double roundedNumber = Math.Round(number, 3);
+                                negnum.Add(roundedNumber);
                             }
                         }
                     }
                 }
             }
 
-            // Вывод отрицательных чисел в консоль
+            // Вывод отрицательных чисел в консоль (уже округленных)
             foreach (double number in negnum)
             {
-                double roundedNumber = Math.Round(number, 3);
-                Console.WriteLine(roundedNumber.ToString("F3", CultureInfo.InvariantCulture));
+                Console.WriteLine(number.ToString("F3", CultureInfo.InvariantCulture));
             }
 
             return negnum.ToArray();
