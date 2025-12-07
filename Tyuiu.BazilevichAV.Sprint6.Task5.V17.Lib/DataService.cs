@@ -10,10 +10,7 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task5.V17.Lib
         public double[] LoadFromDataFile(string path)
         {
 
-            string tempPath = Path.GetTempPath();
-            string outputPath = Path.Combine(tempPath, "OutPutFileTask5V17.txt");
-
-            List<double> negnum = new List<double>();
+            List<double> negativeNumbers = new List<double>();
 
             using (StreamReader reader = new StreamReader(path))
             {
@@ -28,27 +25,23 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task5.V17.Lib
                         if (double.TryParse(numberStr.Replace(',', '.'),
                             NumberStyles.Any,
                             CultureInfo.InvariantCulture,
-                            out double number) && number < 0)
+                            out double number))
                         {
-                            double roundedNumber = Math.Round(number, 3);
-                            negnum.Add(roundedNumber);
+                            if (number < 0)
+                            {
+                                // Округляем до трех знаков после запятой
+                                double roundedNumber = Math.Round(number, 3);
+                                negativeNumbers.Add(roundedNumber);
+
+                                // Выводим в консоль с 3 знаками после запятой
+                                Console.WriteLine(roundedNumber.ToString("F3", CultureInfo.InvariantCulture));
+                            }
                         }
                     }
                 }
             }
 
-            // Запись результата в файл
-            using (StreamWriter writer = new StreamWriter(outputPath, false))
-            {
-                foreach (double number in negnum)
-                {
-                    string formattedNumber = number.ToString("F3", CultureInfo.InvariantCulture);
-                    writer.WriteLine(formattedNumber);
-                    Console.WriteLine(formattedNumber); // Вывод в консоль для проверки
-                }
-            }
-
-            return negnum.ToArray();
+            return negativeNumbers.ToArray();
         }
     }
 }
