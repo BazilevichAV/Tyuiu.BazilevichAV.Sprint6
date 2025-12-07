@@ -12,36 +12,56 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task5.V17.Lib
 
             List<double> negativeNumbers = new List<double>();
 
-            using (StreamReader reader = new StreamReader(path))
+            string content = File.ReadAllText(path);
+
+            // Извлекаем все числа из текста
+            var numbers = new List<double>();
+            string currentNumber = "";
+
+            for (int i = 0; i < content.Length; i++)
             {
-                string line;
-                while ((line = reader.ReadLine()) != null)
+                char c = content[i];
+
+                // Если символ является частью числа (цифра, точка, минус, запятая)
+                if (char.IsDigit(c) || c == '.' || c == '-' || c == ',')
                 {
-                    string[] numbers = line.Split(new char[] { ' ', '\t', ',', ';' },
-                                                  StringSplitOptions.RemoveEmptyEntries);
-
-                    foreach (string numberStr in numbers)
+                    currentNumber += c;
+                }
+                else if (!string.IsNullOrEmpty(currentNumber))
+                {
+                    // Если нашли разделитель или конец числа
+                    if (TryParseNumber(currentNumber, out double number))
                     {
-                        if (double.TryParse(numberStr.Replace(',', '.'),
-                            NumberStyles.Any,
-                            CultureInfo.InvariantCulture,
-                            out double number))
-                        {
-                            if (number < 0)
-                            {
-                                // Округляем до трех знаков после запятой
-                                double roundedNumber = Math.Round(number, 3);
-                                negativeNumbers.Add(roundedNumber);
-
-                                // Выводим в консоль с 3 знаками после запятой
-                                Console.WriteLine(roundedNumber.ToString("F3", CultureInfo.InvariantCulture));
-                            }
-                        }
+                        numbers.Add(number);
                     }
+                    currentNumber = "";
                 }
             }
 
-            return negativeNumbers.ToArray();
+            // Добавляем последнее число, если есть
+            if (!string.IsNullOrEmpty(currentNumber) && TryParseNumber(currentNumber, out double lastNumber))
+            {
+                numbers.Add(lastNumber);
+            }
+
+            // Фильтруем только отрицательные числа
+            return numbers.Where(n => n < 0).ToArray();
+        }
+
+        private bool TryParseNumber(string str, out double result)
+        {
+            // Заменяем запятую на точку для корректного парсинга
+            string normalized = str.Replace(',', '.');
+
+            // Удаляем лишние минусы (оставляем только первый)
+            if (normalized.Count(c => c == '-') > 1)
+            {
+                normalized = normalized.Replace("-", "");
+                normalized = "-" + normalized;
+            }
+
+            return double.TryParse(normalized, System.Globalization.NumberStyles.Any,
+                System.Globalization.CultureInfo.InvariantCulture, out result);
         }
     }
 }
