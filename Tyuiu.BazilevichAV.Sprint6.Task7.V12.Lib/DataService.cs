@@ -5,38 +5,15 @@ using tyuiu.cources.programming.interfaces.Sprint6;
 
 namespace Tyuiu.BazilevichAV.Sprint6.Task7.V12.Lib
 {
+  
     public class DataService : ISprint6Task7V12
     {
         public int[,] GetMatrix(string path)
         {
             string[] lines = File.ReadAllLines(path);
-            
-            int rows = 10; 
+            int rows = 10;
             int cols = 10;
             int targetColumn = 8;
-
-            int[,] matrix = new int[rows, cols];
-
-            // Заполняем матрицу
-            for (int i = 0; i < rows; i++)
-            {
-                string[] values = lines[i].Split(';');
-
-                for (int j = 0; j < cols; j++)
-                {
-                    matrix[i, j] = int.Parse(values[j].Trim());
-                }
-            }
-
-            return matrix;
-        }
-
-        public int[,] GetMatrixAndTransform(string path)
-        {
-            string[] lines = File.ReadAllLines(path);
-            int rows = 10; // или lines.Length
-            int cols = 10; // В ваших данных 10 столбцов!
-            int targetColumn = 8; // 9 столбец
 
             int[,] matrix = new int[rows, cols];
 
@@ -68,6 +45,32 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task7.V12.Lib
                     }
                 }
             }
+            return matrix;
+        }
+
+            
+
+        public int[,] GetMatrixAndTransform(string path)
+        {
+            string[] lines = File.ReadAllLines(path);
+
+            int rows = 10;
+            int cols = 10;
+            int targetColumn = 8;
+
+            int[,] matrix = new int[rows, cols];
+
+            // Заполняем матрицу
+            for (int i = 0; i < rows; i++)
+            {
+                string[] values = lines[i].Split(';');
+
+                for (int j = 0; j < cols; j++)
+                {
+                    matrix[i, j] = int.Parse(values[j].Trim());
+                }
+            }
+
             return matrix;
         }
     }
