@@ -107,7 +107,7 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task7.V12
             try
             {
                 // Получаем преобразованную матрицу
-                int[,] transformedMatrix = ds.GetMatrixAndTransform(openFilePath);
+                int[,] transformedMatrix = ds.GetMatrix(openFilePath);
 
                 // Выводим преобразованные данные в dataGridViewOut
                 for (int r = 0; r < rows; r++)

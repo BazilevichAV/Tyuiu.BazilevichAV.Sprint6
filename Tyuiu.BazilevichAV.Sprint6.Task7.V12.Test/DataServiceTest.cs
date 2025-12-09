@@ -9,11 +9,12 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task7.V12.Test
         [TestMethod]
         public void ValidGetMatrix()
         {
+            
             DataService ds = new DataService();
 
             string path = @"C:\DataSprint6\InPutDataFileTask7V12.csv";
 
-            int[,] matrix = ds.GetMatrix(path);
+            int[,] matrix = ds.GetMatrixAndTransform(path);
 
             // Проверяем размеры (10x10)
             Assert.AreEqual(10, matrix.GetLength(0)); // строки
@@ -32,7 +33,7 @@ namespace Tyuiu.BazilevichAV.Sprint6.Task7.V12.Test
 
             string path = @"C:\DataSprint6\InPutDataFileTask7V12.csv";
 
-            int[,] matrix = ds.GetMatrixAndTransform(path);
+            int[,] matrix = ds.GetMatrix(path);
 
             Assert.AreEqual(10, matrix.GetLength(0));
             Assert.AreEqual(10, matrix.GetLength(1));
